@@ -9,9 +9,6 @@ const FirstPage = ({ navigation }: any) => {
             <Image style={styles.img} source={require('../../assets/png/firstPage/first_half_logo.png')} />
             <Text  style={styles.text}>FineApp</Text>
             <Image style={styles.img} source={require('../../assets/png/firstPage/second_half_logo.png')} />
-            {/* <Text  style={styles.text}>FineApp</Text>
-            <Text  style={styles.text}>FineApp</Text>
-            <Text  style={styles.text}>FineApp</Text> */}
         </View>
        
         
