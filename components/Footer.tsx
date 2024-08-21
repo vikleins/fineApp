@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         maxHeight: 70,
-        width: '100%'
+        width: '100%',
+        backgroundColor: '#f5f5f5',
     },
     text: {
         fontSize: 16,

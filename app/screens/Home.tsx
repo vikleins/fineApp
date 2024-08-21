@@ -1,19 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import {Image, View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { meses, despesasFixas ,despesasUsuais } from '../../core/dataFake';
-import HideValue from '../../assets/svg/hideValue.svg'
-import LineGraph from '../../assets/svg/line-graph.svg'
-import RoundGraph from '../../assets/svg/round-graph.svg'
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import SwiperHome from '../../components/homeSwiper';
+import HomeSwiper from '../../components/homeSwiper';
+import { FIREBASE_AUTH } from '../../firebaseConfig';
 
 interface HomeProps {
     navigation: NavigationProp<any, any>;
 }
 
-const Home: React.FC<HomeProps> = ({ navigation }) => {
+const Home: React.FC<HomeProps> = ({ navigation }: HomeProps) => {
     return (
         <ScrollView style={styles.container}>
 
@@ -25,18 +23,18 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
                     <Text style={styles.saldo_value}>R$ XXX.XX</Text>
                 </View>
                 <View style={styles.hidden}>
-                    <HideValue width={32} height={32}></HideValue>
+                    <Image style={styles.img} source={require('../../assets/png/hideValue.png')} />
                 </View>
             </View>
 
              <View style={styles.content_container}>
-                <SwiperHome items={meses} title="Balanço Mensal" navigation={navigation} />
+                <HomeSwiper items={meses} title="Balanço Mensal" navigation={navigation} />
             </View>
-            <SwiperHome items={despesasFixas} title="Despesas Fixas" navigation={navigation} />
+            <HomeSwiper items={despesasFixas} title="Despesas Fixas" navigation={navigation} />
             <View style={styles.content_container}>
-                <SwiperHome items={despesasUsuais} title="Despesas Usuais" navigation={navigation} />
+                <HomeSwiper items={despesasUsuais} title="Despesas Usuais" navigation={navigation} />
             </View>
-            <SwiperHome items={meses} title="Receitas" navigation={navigation} />
+            <HomeSwiper items={meses} title="Receitas" navigation={navigation} />
 
             <View style={styles.finances_container}>
 
@@ -44,21 +42,22 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
                 <View style={styles.graphs_container}>
                     <View style={styles.graph_content}>
                         <Text style={styles.graph_title}> Mês </Text>
-                        <RoundGraph></RoundGraph>
+                       {/* <RoundGraph></RoundGraph> */}
+                       <Image style={styles.img_graph} source={require('../../assets/png/round-graph.png')} />
                     </View>
                     <View style={styles.graph_content}>
                         <Text style={styles.graph_title}> Ano </Text>
-                        <LineGraph></LineGraph>
+                      {/* <LineGraph></LineGraph> */}
+                      <Image style={styles.img_graph} source={require('../../assets/png/line-graph.png')} />
                     </View>
                 </View>
                 <View style={styles.btnContainer}>
-                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('DespesasFixas')}>
+                    <TouchableOpacity style={styles.button} onPress={() => FIREBASE_AUTH.signOut()}>
                         <Text style={styles.buttonText}>Ver Mais</Text>
                     </TouchableOpacity>
                 </View>
 
             </View>
-
             <Footer/>
 
         </ScrollView>
@@ -144,6 +143,14 @@ const styles = StyleSheet.create({
         fontSize: 12,
         textAlign: 'center',
         fontFamily: 'segoe-ui',
+    },
+    img: {
+        width: 24,
+        height: 24
+    },
+    img_graph: {
+        width: 128,
+        height: 128,
     },
 });
 
